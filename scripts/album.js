@@ -74,36 +74,7 @@ var setCurrentAlbum = function(album) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
-var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
-var songRows = document.getElementsByClassName('album-view-song-item');
-
-var playButtonTemplate = '<a class="album-song-button"<span class="ion-play"></span></a>'
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
-
-     var albums = [albumPicasso, albumMarconi, albumFeat]
-     var index = 1;
-     albumImage.addEventListener("click", function(event) {
-       setCurrentAlbum(album[index]);
-       index++;
-       if (index == albums.length) {
-         index = 0;
-       }
-     ));
-     }
-
-     songListContainer.addEventListener('mouseover', function(event) {
-       // #1
-       if (event.target.parentElement.className === 'album-view-song-item') {
-         event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
-       }
-     });
-
-     for (var i = 0; i < songRows.length; i++) {
-       songRows[i].addEventListener('mouseleave', function(event) {
-         this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
-
-       });
-     }
- };
+   };
