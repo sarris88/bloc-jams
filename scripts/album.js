@@ -56,17 +56,48 @@ var albumPicasso = {
 
   var $row = $(template);
   var clickHandler = function() {
+    var songNumber = $(this).attr('data-song-number');
 
+    if(currentlyPlayingSong){
+      var currentlyPlayingCell  = $('.song-item-number[data-song number= " ' + currentlyPlayingSong + '"]');
+      currentlyPlayingCell.html(currentlyPlayingSong);
+    }
+
+    if(currentlyPlayingSong !== songNumber){
+      $(this).html(pauseButtonTemplate);
+      currentlyPlayingSong = songNumber;
+    } else {
+      $(this).html(playButtonTemplate);
+      currentlyPlayingSong = null;
+    }
   }
+
   var onHover = function(event) {
+    var songNumberCell = $(this).find('.song-item-number');
+    var songNumber = songNumberCell.attr('data-song-number');
+    if(songNumber !== currentlyPlayingSong){
+      songNumberCell.html(playButtonTemplate);
+    }
     };
+
     var offHover = function(event) {
+      var songNumberCell = $(this).find('.song-item-number');
+      var songNumber = songNumberCell.attr('data-song-number');
+      if(songNumber !== currentlyPlayingSong){
+        songNumberCell.html(songNumber);
+      }
+
     };
-  $row.find('.song-item-number').click(clickHandler);
+
+     $row.find('.song-item-number').click(clickHandler);
      $row.hover(onHover, offHover);
      return $row;
 };
 
+var setSong = function(songNumber) {
+  currentlyPlayingSong = parseInt(songNumber);
+  //Use buzz library to set new .sound to song from songnumber
+}
 
 var setCurrentAlbum = function(album) {
   var $albumTitle = $('.album-view-title');
